@@ -1,0 +1,953 @@
+#[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[Custom Widgets]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+#[[[[[[[[[[[[[[[[Labels]]]]]]]]]]]]]]]]
+<Label_FooterTitles@Label>
+	size_hint: None, None
+	width: self.parent.size[0]
+	height: self.parent.size[1]*0.2
+	font_name: app.fontName_Oxygen
+	text_size: self.size
+	font_size: self.size[1]*(app.phi-1)
+	valign: 'middle'
+	halign: 'right'
+	
+	
+<Label_GroupTitle@Label>:
+	size_hint: None, None
+	font_name: app.fontName_Oxygen
+	color: app.colorText3
+	valign: 'middle'
+	halign: 'right'
+	
+	
+<Label_RowTitle@Label>:
+	size_hint: None, None
+	font_name: app.fontName_Oxygen
+	font_size: self.size[1]*(app.phi-1)
+	color: app.colorText1
+	valign: 'middle'
+	halign: 'right'
+	
+	
+<Label_Row@Label>:
+	size_hint: None, None
+	font_name: app.fontName_Oxygen
+	color: app.colorText2
+	valign: 'middle'
+	halign: 'right'
+
+
+#[[[[[[[[[[[[[[[[Text Inputs]]]]]]]]]]]]]]]]
+<TextInput_GroupTitle@TextInput>
+	size_hint: None, None
+	multiline: False
+	background_normal: ''
+	background_color: app.colorBackground2
+	font_name: app.fontName_Oxygen
+	foreground_color: app.colorText3#1,1,1,1
+	text: 'Group Title'
+	
+	
+<TextInput_Row@TextInput>
+	size_hint: None, None
+	background_normal: ''
+	background_disabled_normal: ''
+	background_color: app.colorBackground2
+	font_name: app.fontName_Oxygen
+	foreground_color: app.colorText1
+	disabled_foreground_color: app.colorText2
+	
+	
+<TextInput_Saves@TextInput>
+	size_hint: None, None
+	multiline: False
+	background_normal: ''
+	background_color: app.colorBackground2
+	font_name: app.fontName_Oxygen
+	foreground_color: app.colorText1
+
+
+#[[[[[[[[[[[[[[[[Buttons]]]]]]]]]]]]]]]]
+<Button_ProjectMenu@Button>:
+	text: ''
+	size_hint: None, None
+	font_name: app.fontName_Oxygen
+	font_size: self.size[1]*((app.phi-1)**2)
+	background_color: app.colorBackground2
+	background_normal: ''
+#	color: 1,0,0,1
+	canvas:
+		Color:
+			rgba: app.colorBackground3 # (1,0,0,1) if app.toggleGroupEdit else app.colorBackground3
+		Line: 
+			points: [self.x, self.top, self.right, self.top, self.right, self.y, self.x, self.y, self.x, self.top]
+			width: app.Size13
+		
+		
+<Button_ProjectMenuToggle@Button>
+	size_hint: None, None
+	size: self.parent.size[0], self.parent.size[1]
+	background_color: 0,0,0,0
+	BoxLayout:
+		orientation: 'vertical'
+		size_hint: None, None
+		size: self.parent.size[0], self.parent.size[1]
+		pos: self.parent.pos
+		BoxLayout:
+			size_hint: None, None
+			size: self.parent.size[0], self.parent.size[1]*.15
+		BoxLayout:
+			size_hint: None, None
+			size: self.parent.size[0], self.parent.size[1]*.7
+			canvas:
+			#	Color:
+#					rgba: app.colorBackground3
+#				RoundedRectangle:
+#					size: self.size[0]+app.Size7, self.size[1]+app.Size7
+#					pos: self.pos[0]-(app.Size7/2), self.pos[1]-(app.Size7/2)
+#				Color:
+#					rgba: app.colorText1
+				Line:
+					points: [self.x, self.y, self.right, self.top] if app.toggleMenu else [self.x, self.top, self.right, self.top]
+					width: app.Size12
+				Line:
+					points: [self.x, self.y, self.right, self.top] if app.toggleMenu else [self.x, (self.top+self.y)/2, self.right, (self.top+self.y)/2]
+					width: app.Size12
+				Line:
+					points: [self.x, self.top, self.right, self.y] if app.toggleMenu else [self.x, self.y, self.right, self.y]
+					width: app.Size12
+		BoxLayout:
+			size_hint: None, None
+			size: self.parent.size[0], self.parent.size[1]*.15
+			
+			
+<Button_GroupArrow@Button>:
+	size_hint: None, None
+	background_color: 0,0,0,0
+			
+			
+<Button_GroupShiftDownArrow@Button>:
+	size_hint: None, None
+	background_color: 0,0,0,0
+	canvas:
+		Color:
+			rgba: app.colorMain2
+		Line:
+			points: [self.x+((self.right-self.x)*0.25), self.y+((self.top-self.y)*0.7), self.center[0], self.y+((self.top-self.y)*0.3), self.x+((self.right-self.x)*0.75), self.y+((self.top-self.y)*0.7)]
+			width: app.Size12
+
+
+<Button_GroupShiftUpArrow@Button>:
+	size_hint: None, None
+	background_color: 0,0,0,0
+	canvas:
+		Color:
+			rgba: app.colorMain2
+		Line:
+			points: [self.x+((self.right-self.x)*0.25), self.y+((self.top-self.y)*0.3), self.center[0], self.y+((self.top-self.y)*0.7), self.x+((self.right-self.x)*0.75), self.y+((self.top-self.y)*0.3)]
+			width: app.Size12
+
+
+<Button_GroupDelete@Button>:
+	size_hint: None, None
+	background_color: 0,0,0,0
+	canvas:
+		Color:
+			rgba: app.colorDeleteButton
+		Rectangle:
+			pos: self.pos
+			size: self.size
+		Color:
+			rgba: 1,1,1,1
+		RoundedRectangle:
+			pos: self.center[0]-((self.size[0]*0.561)*0.5), self.pos[1]+(self.size[1]*.081)
+			size: self.size[0]*0.561, self.size[1]*0.660
+			radius: [6,6,12,12]
+		Color:
+			rgba: 1,1,1,1
+		RoundedRectangle:
+			pos: self.pos[0]+(self.size[0]*0.169), self.pos[1]+(self.size[1]*0.786)
+			size: self.size[0]*0.662, self.size[1]*0.091
+			radius: [6,6,6,6]
+		Color:
+			rgba: 1,1,1,1
+		RoundedRectangle:
+			pos: self.pos[0]+(self.size[0]*0.338), self.pos[1]+(self.size[1]*0.877)
+			size: self.size[0]*0.324, self.size[1]*0.047
+			radius: [6,6,0,0]
+		Color:
+			rgba: app.colorDeleteButton
+		RoundedRectangle:
+			pos: self.pos[0]+(self.size[0]*0.350), self.pos[1]+(self.size[1]*0.2)
+			size: self.size[0]*0.1, self.size[1]*0.43
+			radius: [6,6,6,6]
+		Color:
+			rgba: app.colorDeleteButton
+		RoundedRectangle:
+			pos: self.pos[0]+(self.size[0]*0.550), self.pos[1]+(self.size[1]*0.2)
+			size: self.size[0]*0.1, self.size[1]*0.43
+			radius: [6,6,6,6]
+			
+			
+<Button_RowLock@Button>:
+	size_hint: None, None
+	background_color: 0,0,0,0
+	canvas:
+		Color:
+			rgba: 0,0,0,0
+		Rectangle:
+			pos: self.pos
+			size: self.size
+		Color:
+			rgba: app.colorMain1
+		RoundedRectangle:
+			pos: [self.pos[0]+(self.size[0]*0.4), self.pos[1]+(self.size[1]*0.1)] if app.toggleMenu else [self.pos[0]+(self.size[0]*0.2), self.pos[1]+(self.size[1]*0.1)]
+			size: [self.size[0]*0.6, self.size[1]*0.471] if app.toggleMenu else [self.size[0]*0.6, self.size[1]*0.471]
+			radius: [6,6,12,12]
+		Color:
+			rgba: app.colorMain1
+		Line:
+			circle: (self.center[0]-(self.size[0]*0.2), self.y+(self.size[1]*0.68), self.size[0]*(0.35/2), -90, 90) if root.toggleRowLock else (self.center[0], self.y+(self.size[1]*0.68), self.size[0]*(0.35/2), -90, 90)
+			width: app.Size12
+		Line:
+			points: [self.center[0]-((self.size[0]*0.75))/2, self.y+(self.size[1]*0.571), self.center[0]-((self.size[0]*0.75))/2, self.y+(self.size[1]*0.68)] if root.toggleRowLock else [self.center[0]-((self.size[0]*0.35))/2, self.y+(self.size[1]*0.571), self.center[0]-((self.size[0]*0.35))/2, self.y+(self.size[1]*0.68)]
+			width: app.Size12
+		Line:
+			points: [self.center[0]-((self.size[0]*0.05))/2, self.y+(self.size[1]*0.571), self.center[0]-((self.size[0]*0.05))/2, self.y+(self.size[1]*0.68)] if app.toggleMenu else [self.center[0]+((self.size[0]*0.35))/2, self.y+(self.size[1]*0.571), self.center[0]+((self.size[0]*0.35))/2, self.y+(self.size[1]*0.68)]
+			width: app.Size12
+
+			
+<Button_RowDelete@Button>:
+	size_hint: None, None
+	background_color: 0,0,0,0
+	canvas:		
+		Color:
+			rgba: app.colorDeleteButton
+		Rectangle:
+			pos: self.pos
+			size: self.size	
+		Color:
+			rgba: 1,1,1,1
+		RoundedRectangle:
+			pos: self.center[0]-((self.size[0]*0.561)*0.5), self.pos[1]+(self.size[1]*.081)
+			size: self.size[0]*0.561, self.size[1]*0.660
+			radius: [6,6,12,12]
+		Color:
+			rgba: 1,1,1,1
+		RoundedRectangle:
+			pos: self.pos[0]+(self.size[0]*0.169), self.pos[1]+(self.size[1]*0.786)
+			size: self.size[0]*0.662, self.size[1]*0.091
+			radius: [6,6,6,6]
+		Color:
+			rgba: 1,1,1,1
+		RoundedRectangle:
+			pos: self.pos[0]+(self.size[0]*0.338), self.pos[1]+(self.size[1]*0.877)
+			size: self.size[0]*0.324, self.size[1]*0.047
+			radius: [6,6,0,0]
+		Color:
+			rgba: app.colorDeleteButton
+		RoundedRectangle:
+			pos: self.pos[0]+(self.size[0]*0.350), self.pos[1]+(self.size[1]*0.2)
+			size: self.size[0]*0.1, self.size[1]*0.43
+			radius: [6,6,6,6]
+		Color:
+			rgba: app.colorDeleteButton
+		RoundedRectangle:
+			pos: self.pos[0]+(self.size[0]*0.550), self.pos[1]+(self.size[1]*0.2)
+			size: self.size[0]*0.1, self.size[1]*0.43
+			radius: [6,6,6,6]
+			
+			
+<Button_RowShiftUpArrow@Button>:
+	size_hint: None, None
+	background_color: 0,0,0,0
+	canvas:
+		Color:
+			rgba: app.colorMain2
+		Line:
+			points: [self.x+((self.right-self.x)*0.25), self.y+((self.top-self.y)*0.3), self.center[0], self.y+((self.top-self.y)*0.7), self.x+((self.right-self.x)*0.75), self.y+((self.top-self.y)*0.3)]
+			width: app.Size12
+			
+			
+<Button_RowShiftDownArrow@Button>:
+	size_hint: None, None
+	background_color: 0,0,0,0
+	canvas:
+		Color:
+			rgba: app.colorMain2
+		Line:
+			points: [self.x+((self.right-self.x)*0.25), self.y+((self.top-self.y)*0.7), self.center[0], self.y+((self.top-self.y)*0.3), self.x+((self.right-self.x)*0.75), self.y+((self.top-self.y)*0.7)]
+			width: app.Size12
+
+		
+<Button_ProjectSave@Button>:
+	size_hint: None, None
+	background_color: 0,0,0,0
+	font_name: app.fontName_Oxygen
+	font_size: self.size[1]*((app.phi-1)**2)
+	text: 'Project Save'
+	canvas:
+		Color:
+			rgba: app.colorMain1
+		Line:
+			rectangle: (self.x, self.y, self.size[0], self.size[1])
+			width: app.Size13
+			
+
+<Button_AddRow@Button>:
+	size_hint: None, None
+	background_color: 0,0,0,0
+	font_name: app.fontName_Oxygen
+	font_size: self.size[1]*((app.phi-1)**1)
+	color: app.colorMain1
+	text: '+'
+	canvas.before:
+		Color:
+			rgba: app.colorBackground2
+		Rectangle:
+			pos: self.pos
+			size: self.size
+		Color:
+			rgba: app.colorBackground2
+		Line:
+			rectangle: (self.x, self.y, self.size[0], self.size[1])
+			width: app.Size12
+			
+				
+#[[[[[[[[[[[[[[[[Shapes]]]]]]]]]]]]]]]]
+<Line_ProjectTitle@BoxLayout>:
+	size_hint: 1, None
+	height: app.Size12
+	canvas:
+		Color:
+			rgba: 1,1,1,1
+		Rectangle:
+			size: self.size
+			pos: self.pos
+			
+			
+<Line_GroupTitle@BoxLayout>
+	size_hint: None, None
+	canvas:
+		Color:
+			rgba: app.colorMain1
+		Line:
+			points: [self.x, (self.y+self.top)/2, self.right, (self.y+self.top)/2]
+			width: app.Size13
+			
+			
+<Line_GroupTitle2@BoxLayout>
+	size_hint: None, None
+	canvas:
+		Color:
+			rgba: app.colorBackground2
+		Line:
+			points: [self.center[0], self.top, self.center[0], self.y]
+			width: app.Size13
+
+
+#[[[[[[[[[[[[[[[[Other]]]]]]]]]]]]]]]]
+<BoxLayout_V@BoxLayout>:
+	orientation: 'vertical'
+	size_hint: None, None
+	
+	
+<BoxLayout_H@BoxLayout>:
+	orientation: 'horizontal'
+	size_hint: None, None
+	
+	
+<BoxLayout_@BoxLayout>:
+	size_hint: None, None
+	
+	
+#[[[[[[[[[[[[[[[[Choose Image Popup]]]]]]]]]]]]]]]]
+<ChooseImagePopup@Popup>:
+	title: 'Select an Image'
+	size_hint: None, None
+	size: app.windowSizeX*0.8, app.windowSizeY*0.5
+
+	BoxLayout:
+		orientation: 'vertical'
+		FileChooserIconView:
+			id: id_FileChooser
+			filters: ['*.png', '*.jpg', '*.jpeg']
+			on_selection: root.select_image(args[1])
+	
+		Button:
+			text: 'Close'
+			size_hint_y: None
+			height: app.Size6
+			on_release: root.dismiss()
+			
+			
+#[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[ProjectSavesGroup]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+<ProjectSavesGroup@BoxLayout>:
+	id: id_ProjectSavesGroup
+	size_hint: None, None
+	orientation: 'vertical'
+	size: app.windowSizeX, self.minimum_height 
+	
+	BoxLayout_H:
+		size: self.parent.size[0], app.Size5 if app.toggleProjectSaveAs else 0
+		opacity: 1 if app.toggleProjectSaveAs else 0
+		
+		canvas:
+			Color:
+				rgba: app.colorBackground2
+			Rectangle:
+				size: self.size
+				pos: self.pos
+		Button:
+			id: id_buttonSaveProject
+			size_hint: None, None
+			size: app.Size3, self.parent.size[1]
+			text: 'Save'
+			on_release: root.saveAs_project()
+		TextInput_Saves:
+			id: id_inputProjectSaveName
+			size: self.parent.size[0]-id_buttonSaveProject.size[0], self.parent.size[1]
+			font_size: self.size[1]*(app.phi-1)
+		
+		
+	ScrollView:
+		size_hint: None, None
+		size: self.parent.size[0], app.windowSizeY-(app.Size3+id_buttonSaveProject.size[1]) if app.toggleProjectSaves else 0
+		do_scroll_x: False
+		do_scroll_y: True
+		opacity: 1 if app.toggleProjectSaves else 0
+		
+		BoxLayout_V:
+			id: id_containerSaves
+			size: app.windowSizeX, self.minimum_height
+	#		ProjectSavesRow:
+
+				
+#[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[ProjectSavesRow]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+<ProjectSavesRow@BoxLayout>:
+	size_hint: None, None
+	orientation: 'horizontal'
+	size: app.windowSizeX, app.Size5
+	Button_ProjectSave:
+		id: id_buttonProjectSave
+		size: (self.parent.size[0]-self.parent.size[1]) if app.toggleSaveDelete else self.parent.size[0], self.parent.size[1] if app.toggleProjectSaves else 0
+		on_release: root.load_project() if app.toggleProjectLoad else root.save_project()
+	Button_RowDelete:
+		id: id_buttonDeleteProjectSave
+		size: self.parent.size[1] if app.toggleSaveDelete else 0, self.parent.size[1]
+		opacity: 1 if app.toggleSaveDelete else 0
+		disabled: False if app.toggleSaveDelete else True
+		on_release: root.delete_save()
+	
+
+#[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[Group]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+<Group@BoxLayout>:
+	size_hint: None, None
+	orientation: 'vertical'
+	size: app.windowSizeX, 0 if app.toggleProjectSaves else self.minimum_height
+	
+	BoxLayout_V:
+		size: self.parent.size[0], app.Size5 if app.toggleGroupEdit else app.Size6
+		BoxLayout_H:
+			size: self.parent.size[0], app.Size5 if app.toggleGroupEdit else 0
+			opacity: 1 if app.toggleGroupEdit else 0
+			disabled: False if app.toggleGroupEdit else True
+			canvas:
+				Color:
+					rgba: app.colorBackground2
+				Rectangle:
+					size: self.size
+					pos: self.pos
+			BoxLayout_:
+				size: self.parent.size[0]-(root.ids.id_containerGroupShiftButtons.size[0]+root.ids.id_buttonGroupDelete.size[0]+root.ids.id_inputGroupTitle.size[0]), self.parent.size[1]
+			BoxLayout_V:
+				size: id_inputGroupTitle.size[0], self.parent.size[1]
+				BoxLayout_:
+					size: id_inputGroupTitle.size[0], (self.parent.size[1]-id_inputGroupTitle.size[1])/2
+				TextInput_GroupTitle:
+					id: id_inputGroupTitle
+					size: max((app.windowSizeX-(id_containerGroupShiftButtons.size[0]+id_buttonGroupDelete.size[0]))/2, id_labelGroupTitle2.texture_size[0]), app.Size6
+					text_size: self.size
+					font_size: self.size[1]*(app.phi-1)
+					on_text: id_labelGroupTitle.text = self.text
+					on_text: id_labelGroupTitle2.text = self.text
+				BoxLayout_:
+					size: id_inputGroupTitle.size[0], (self.parent.size[1]-id_inputGroupTitle.size[1])/2
+					
+			BoxLayout_V:
+				id: id_containerGroupShiftButtons
+				size: self.parent.size[1]*2, self.parent.size[1]
+				Button_GroupShiftUpArrow:
+					id: id_buttonGroupShiftUp
+					size: self.parent.size[0], self.parent.size[1]*0.5
+					on_release: root.shift_row_up()
+				Button_GroupShiftDownArrow:
+					id: id_buttonGroupShiftDown
+					size: self.parent.size[0], self.parent.size[1]*0.5
+					on_release: root.shift_row_down()
+			Button_GroupDelete:
+				id: id_buttonGroupDelete
+				size: app.Size5, self.parent.size[1]
+				on_release: root.delete_group()
+			
+		BoxLayout_H:
+			size: self.parent.size[0], 0 if app.toggleGroupEdit else app.Size6
+			opacity: 0 if app.toggleGroupEdit else 1
+			Button_GroupArrow:
+				id: id_buttonGroupArrowDown
+				size: self.parent.size[1], self.parent.size[1]
+				on_release: root.toggle_Group()
+				on_release: root.calculate_priceGroup()
+				canvas:
+					Color:
+						rgba: app.colorMain1
+					Line:
+						points: [self.x+((self.right-self.x)*0.1), self.y+((self.top-self.y)*0.3), self.center[0], self.y+((self.top-self.y)*0.7), self.x+((self.right-self.x)*0.9), self.y+((self.top-self.y)*0.3)] if root.toggleGroup else [self.x+((self.right-self.x)*0.1), self.y+((self.top-self.y)*0.7), self.center[0], self.y+((self.top-self.y)*0.3), self.x+((self.right-self.x)*0.9), self.y+((self.top-self.y)*0.7)]
+						width: app.Size13
+			Line_GroupTitle:
+				size: ((self.parent.size[0]-root.ids.id_containerGroupTitle.size[0])/2)-(root.ids.id_buttonGroupArrowDown.size[0]), self.parent.size[1]
+			BoxLayout_V:
+				id: id_containerGroupTitle
+				size: id_labelGroupTitle.size[0], self.parent.size[1]
+				Label_GroupTitle:
+					id: id_labelGroupTitle
+					size: self.texture_size[0], self.parent.size[1]
+					opacity: 1
+					font_size: self.parent.size[1]*(app.phi-1)
+					text: id_inputGroupTitle.text
+			Line_GroupTitle:
+				size: ((self.parent.size[0]-root.ids.id_containerGroupTitle.size[0])/2)-root.ids.id_labelGroupPrice.size[0], self.parent.size[1]
+			Label_GroupTitle:
+				id: id_labelGroupPrice
+				size: self.texture_size[0], self.parent.size[1]
+				font_size: self.parent.size[1]*(app.phi-1)
+				text: '$0.00'
+			Label_GroupTitle:
+				id: id_labelGroupPurchasedPrice
+				size: 0, 0
+				font_size: 0
+				opacity: 0
+				text: '0'
+	BoxLayout_H:
+		size: self.parent.size[0], root.ids.id_containerRows.size[1]
+		BoxLayout_V:
+			size: app.Size6, root.ids.id_containerRows.size[1]
+			opacity: 1 if root.toggleGroup else 0
+			Line_GroupTitle2:
+				size: self.parent.size[0], (self.parent.size[1]-root.ids.id_labelGroupTitle2.texture_size[0])/2
+			Label_GroupTitle:
+				id: id_labelGroupTitle2
+				size: self.parent.size[0], min(id_labelGroupTitle.texture_size[0], id_containerRows.size[1])
+				text: id_inputGroupTitle.text
+				font_size: self.parent.size[0]*(app.phi-1) if root.toggleGroup else 0
+				text_size: self.size[1], None
+				opacity: 1 if root.toggleGroup else 0
+				max_lines: 1
+				center: self.parent.center
+				canvas.before:
+					PushMatrix
+					Rotate:
+						angle: 90
+						origin: self.center
+				canvas.after:
+					PopMatrix
+			Line_GroupTitle2:
+				size: self.parent.size[0], (self.parent.size[1]-root.ids.id_labelGroupTitle2.texture_size[0])/2
+		BoxLayout_V:
+			id: id_containerRows
+			size: self.parent.size[0], self.minimum_height if root.toggleGroup else 0
+			opacity: 1 if root.toggleGroup else 0
+			pos: self.pos if root.toggleGroup else (app.windowSizeX, self.pos[1])
+			disabled: False if root.toggleGroup else True
+
+			Button_AddRow:
+				size: self.parent.size[0]-id_labelGroupTitle2.size[0], app.Size5
+				opacity: 1
+				on_release: root.add_row()
+					
+
+#[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[Row]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+<Row@BoxLayout>:
+	id: id_Row
+	size_hint: None, None
+	orientation: 'vertical'
+	size: app.windowSizeX-app.Size6, app.Size3+app.Size7
+
+	BoxLayout_H:
+		size: self.parent.size[0], id_Row.size[1]-id_underlineRow.size[1]
+		canvas:
+			Color:
+				rgba: app.colorBackground2
+			RoundedRectangle:
+				pos: self.pos
+				size: self.size
+				radius: [self.size[1]*((app.phi-1)**3)]
+		
+		Button:
+			id: id_imageRowItem
+			size_hint: None, None
+			size: self.parent.size[1], self.parent.size[1]
+			background_color: 0,0,0,0
+			on_release: root.open_file_chooser()
+			disabled: True if root.toggleRowLock else False
+			opacity: 0 if self.source == '' else 1
+			source: ''
+			canvas:
+				Color:
+					rgba: 1,1,1,1
+				RoundedRectangle:
+					pos: self.pos
+					size: self.size
+					radius: [self.size[1]*((app.phi-1)**3), 0, 0, self.size[1]*((app.phi-1)**3)]
+					source: root.ids.id_imageRowItem.source
+		
+		BoxLayout_V:
+			size: self.parent.size[0]-(id_imageRowItem.size[0]+id_containerRowButtons.size[0]), self.parent.size[1]
+		
+			BoxLayout_H:
+				size: self.parent.size[0], app.Size4
+				BoxLayout_V:
+					id: id_containerRowDescription
+					size: self.parent.size[0]*((app.phi-1)**1)+self.parent.size[0]*((app.phi-1)**4), self.parent.size[1]
+					TextInput_Row:
+						id: id_inputRowItemTitle
+						size: self.parent.size[0], self.parent.size[1]*((app.phi-1)**3)
+						disabled: True if root.toggleRowLock else False
+						halign: 'center'
+						font_size: self.size[1]*((app.phi-1)**1)
+						hint_text: 'Item'
+					TextInput_Row:
+						id: id_inputRowDescription
+						size: self.parent.size[0], self.parent.size[1]-id_inputRowItemTitle.size[1]
+						font_size: self.size[1]*((app.phi-1)**3)
+						opacity: 1
+						disabled: True if root.toggleRowLock else False
+						hint_text: 'Description'
+				BoxLayout_V:
+					size: self.parent.size[0]*((app.phi-1)**3), self.parent.size[1]
+					Label_RowTitle:
+						size: self.parent.size[0], id_inputRowItemTitle.size[1]
+						text: 'Purchased'
+					Button:
+						id: id_buttonPurchased
+						size_hint: None, None
+						size: self.parent.size[0], id_containerRowDescription.size[1]-id_inputRowItemTitle.size[1]
+						background_color: 0,0,0,0
+						on_release: root.toggle_rowPurchased()
+						on_release: id_labelRowPrice.text = id_inputRowPrice.text
+						color: 0,0,0,0
+						canvas:
+							Color:
+								rgba: app.colorText2 if root.toggleRowPurchased else (0,0,0,0)
+							RoundedRectangle:
+								size: self.size[1]*((app.phi-1)**2), self.size[1]*((app.phi-1)**2)
+								pos: self.center[0] - (self.size[1]*((app.phi-1)**2))*0.5, self.center[1] - (self.size[1]*((app.phi-1)**2))*0.5
+								radius: [(self.size[1]*((app.phi-1)**2))*((app.phi-1)**3)]
+							Color:
+								rgba: app.colorText2
+							Line:
+								rounded_rectangle: (self.center[0]-(self.size[1]*((app.phi-1)**1))*0.5, self.center[1]-(self.size[1]*((app.phi-1)**1))*0.5, self.size[1]*((app.phi-1)**1), self.size[1]*((app.phi-1)**1), (self.size[1]*((app.phi-1)**1))*((app.phi-1)**3), 128)	#(x, y, width, height, corner_radius1, corner_radius2, corner_radius3, corner_radius4, resolution)
+								width: app.Size13
+								
+				
+			BoxLayout_H:
+				size: self.parent.size[0], app.Size5
+				BoxLayout_V:
+					size: self.parent.size[0]*((app.phi-1)**2), self.parent.size[1]
+					Label_RowTitle:
+						id: id_labelRowPriceTitle
+						size: self.parent.size[0], self.parent.size[1]*((app.phi-1)**2)
+						text: 'Price/each'
+					TextInput_Row:
+						id: id_inputRowPrice########  PRICE
+						size: self.parent.size[0], 0 if root.toggleRowLock else self.parent.size[1]-self.parent.size[1]*((app.phi-1)**2)
+						opacity: 0 if root.toggleRowLock else 1
+						multiline: False
+						font_size: self.size[1]*(app.phi-1)
+						input_filter: 'float'
+						on_text: app.calculate_cost()
+						on_focus: root.handling_emptyInput()
+						text: '$0.00'
+					Label_Row:
+						id: id_labelRowPrice
+						size: self.parent.size[0], self.parent.size[1]-self.parent.size[1]*((app.phi-1)**2) if root.toggleRowLock else 0
+						opacity: 1 if root.toggleRowLock else 0
+						font_size: self.size[1]*(app.phi-1)
+						text: '$0.00'
+						
+				BoxLayout_V:
+					size: self.parent.size[0]*((app.phi-1)**3), self.parent.size[1]
+					Label_RowTitle:
+						id: id_labelRowQuantityTitle
+						size: self.parent.size[0], id_labelRowPriceTitle.size[1]
+						text: 'Quantity'
+					TextInput_Row:
+						id: id_inputRowQuantity########  QUANTITY
+						size: self.parent.size[0], 0 if root.toggleRowLock else self.parent.size[1]-id_labelRowQuantityTitle.size[1]
+						opacity: 0 if root.toggleRowLock else 1
+						multiline: False
+						font_size: id_inputRowPrice.font_size
+						input_filter: 'int'
+						text: '0'
+						on_text: id_labelRowQuantity.text = str(int(self.text)) if self.text.isdigit() else '0'
+						on_text: app.calculate_cost()
+						on_focus: root.handling_emptyInput()
+					Label_Row:
+						id: id_labelRowQuantity
+						size: self.parent.size[0], self.parent.size[1]-id_inputRowItemTitle.size[1] if root.toggleRowLock else 0
+						opacity: 1 if root.toggleRowLock else 0
+						font_size: id_labelRowPrice.font_size
+						text: '0'
+					
+				BoxLayout_V:
+					size: self.parent.size[0]*((app.phi-1)**2), self.parent.size[1]
+					Label_RowTitle:
+						id: id_labelRowTotalPriceTitle########  TOTAL PRICE
+						size: self.parent.size[0], id_labelRowPriceTitle.size[1]
+						text: 'Total Price'
+					Label_Row:
+						id: id_labelRowTotalPrice
+						size: self.parent.size[0], self.parent.size[1]-id_labelRowTotalPriceTitle.size[1]
+						opacity: 1
+						font_size: id_labelRowPrice.font_size if root.toggleRowLock else id_inputRowPrice.font_size
+						text: '$0.00'
+						
+		BoxLayout_V:
+			id: id_containerRowButtons
+			size: app.Size5, self.parent.size[1]
+			Button_RowShiftUpArrow:
+				size: self.parent.size[0], self.parent.size[1]*(1/3)
+				disabled: True if root.toggleRowLock else False
+				opacity: 0 if root.toggleRowLock else 1
+				on_release: root.shift_row_up()
+			Button_RowDelete:
+				size: self.parent.size[0], self.parent.size[1]*(1/3) if app.toggleRowDelete else 0
+				opacity: 1 if app.toggleRowDelete else 0
+				on_release: root.delete_row()
+				
+			Button:
+				id: id_buttonRowLock  ###  Lock  ###
+				size: self.parent.size[0], 0 if app.toggleRowDelete else self.parent.size[1]*(1/3) 
+				opacity: 0 if app.toggleRowDelete else 1
+				size_hint: None, None
+				background_color: 0,0,0,0
+				on_release: root.toggle_rowLock()
+				canvas:
+					Color:
+						rgba: 0,0,0,0
+					Rectangle:
+						pos: self.pos
+						size: self.size
+					Color:
+						rgba: app.colorMain1
+					RoundedRectangle:
+						pos: [self.pos[0]+(self.size[0]*0.2), self.pos[1]+(self.size[1]*0.1)] if root.toggleRowLock else [self.pos[0]+(self.size[0]*0.4), self.pos[1]+(self.size[1]*0.1)]
+						size: [self.size[0]*0.6, self.size[1]*0.471]
+						radius: [6,6,12,12]
+					Color:
+						rgba: app.colorMain1
+					Line:
+						circle: (self.center[0], self.y+(self.size[1]*0.68), self.size[0]*(0.35/2), -90, 90) if root.toggleRowLock else (self.center[0]-(self.size[0]*0.2), self.y+(self.size[1]*0.68), self.size[0]*(0.35/2), -90, 90)
+						width: app.Size12
+					Line:
+						points: [self.center[0]-((self.size[0]*0.35))/2, self.y+(self.size[1]*0.571), self.center[0]-((self.size[0]*0.35))/2, self.y+(self.size[1]*0.68)] if root.toggleRowLock else [self.center[0]-((self.size[0]*0.75))/2, self.y+(self.size[1]*0.571), self.center[0]-((self.size[0]*0.75))/2, self.y+(self.size[1]*0.68)] 
+						width: app.Size12
+					Line:
+						points: [self.center[0]+((self.size[0]*0.35))/2, self.y+(self.size[1]*0.571), self.center[0]+((self.size[0]*0.35))/2, self.y+(self.size[1]*0.68)] if root.toggleRowLock else [self.center[0]-((self.size[0]*0.05))/2, self.y+(self.size[1]*0.571), self.center[0]-((self.size[0]*0.05))/2, self.y+(self.size[1]*0.68)]
+						width: app.Size12
+			
+			Button_RowShiftDownArrow:
+				size: self.parent.size[0], self.parent.size[1]*(1/3)
+				disabled: True if root.toggleRowLock else False
+				opacity: 0 if root.toggleRowLock else 1
+				on_release: root.shift_row_down()
+	
+	BoxLayout_H:
+		id: id_underlineRow
+		size: self.parent.size[0], id_Row.size[1]-app.Size3
+		canvas:
+			Color:
+				rgba: app.colorMain1
+			Line:
+				points: [self.center[0]-((self.size[0]*(app.phi-1))*0.5), self.center[1], self.center[0]+((self.size[0]*(app.phi-1))*0.5), self.center[1]]
+				width: app.Size13
+
+	
+	
+#[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[Setup Planner]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+<SetupPlanner>:
+	id: id_SetupPlanner
+	orientation: 'vertical'
+	size: app.windowSizeX, app.windowSizeY
+	canvas:
+		Color:
+			rgba: app.colorBackground1
+		Rectangle:
+			size: self.size
+			pos: self.pos
+	
+#[[[[[[[[[[[[[[[[ Project Title ]]]]]]]]]]]]]]]]
+	BoxLayout_H:
+		id: id_containerProjectTitle
+		size: app.windowSizeX, 0 if app.toggleProjectSaves else app.Size6
+		canvas:
+			Color:
+				rgba: app.colorBackground2
+			Rectangle:
+				size: self.size
+				pos: self.pos
+		BoxLayout_V:
+			size: (app.windowSizeX-root.ids.id_labelProjectTitle.size[0])/2, self.parent.size[1]
+		Label:
+			id: id_labelProjectTitle
+			size_hint: None, 1
+			width: self.texture_size[0]
+			font_size: self.size[1]*((app.phi-1))
+			valign: 'middle'
+			font_name: app.fontName_Oxygen
+			text: 'Project Title'
+		BoxLayout_V:
+			id: id_containerSavesGroup
+			size: (app.windowSizeX-root.ids.id_labelProjectTitle.size[0])/2, self.parent.size[1]
+			
+	ProjectSavesGroup:
+		id: id_ProjectSavesGroup
+				
+#[[[[[[[[[[[[[[[[ Scroll View ]]]]]]]]]]]]]]]]
+	ScrollView:
+		size_hint: None, None
+		size: self.parent.size[0], 0 if app.toggleProjectSaves else self.parent.size[1]-(root.ids.id_containerProjectTitle.size[1]+root.ids.id_footerProject.size[1])
+		do_scroll_x: False
+		do_scroll_y: True
+		
+		BoxLayout_V:
+			id: id_containerGroups
+			size: app.windowSizeX, self.minimum_height
+			
+			Group:
+				
+#[[[[[[[[[[[[[[[[ Project Footer ]]]]]]]]]]]]]]]]	
+	BoxLayout_V:
+		id: id_footerProject
+		size: app.windowSizeX, app.Size3
+		BoxLayout_H:
+			size: self.parent.size[0], 0
+			BoxLayout_V:
+				id: id_containerMenuButtons
+				size: self.minimum_width, self.minimum_height
+				Button_ProjectMenu:
+					text: 'Add Group'
+					size: app.Size3, app.Size5 if app.toggleMenu and not app.toggleProjectSaves and not app.toggleRowDelete and not app.toggleGroupEdit else 0
+					opacity: 1 if app.toggleMenu and not app.toggleProjectSaves and not app.toggleRowDelete and not app.toggleGroupEdit else 0
+					disabled: False if app.toggleMenu and not app.toggleProjectSaves else True
+					on_release: root.add_Group()
+				Button_ProjectMenu:
+					text: 'Edit Groups'
+					size: app.Size3, app.Size5 if app.toggleMenu and not app.toggleProjectSaves and not app.toggleRowDelete else 0
+					opacity: 1 if app.toggleMenu and not app.toggleProjectSaves and not app.toggleRowDelete else 0
+					disabled: False if app.toggleMenu and not app.toggleProjectSaves else True
+					background_color: (1,0,0,1) if app.toggleGroupEdit else app.colorBackground2
+					on_release: app.toggle_groupEdit()
+				Button_ProjectMenu:
+					text: 'Delete Rows'
+					size: app.Size3, app.Size5 if app.toggleMenu and not app.toggleProjectSaves and not app.toggleGroupEdit else 0
+					opacity: 1 if app.toggleMenu and not app.toggleProjectSaves and not app.toggleGroupEdit else 0
+					disabled: False if app.toggleMenu and not app.toggleProjectSaves else True
+					background_color: (1,0,0,1) if app.toggleRowDelete else app.colorBackground2
+					on_release: app.toggle_rowDelete()
+				Button_ProjectMenu:
+					text: 'Save'
+					size: app.Size3, app.Size5 if app.toggleMenu and not app.toggleProjectSaves and not app.toggleRowDelete and not app.toggleGroupEdit else 0
+					opacity: 1 if app.toggleMenu and not app.toggleProjectSaves and not app.toggleRowDelete and not app.toggleGroupEdit else 0
+					disabled: False if app.toggleMenu and not app.toggleProjectSaves else True
+					on_release: root.save_project()
+				Button_ProjectMenu:
+					text: 'Save As'
+					size: app.Size3, app.Size5 if app.toggleMenu and not app.toggleRowDelete and not app.toggleGroupEdit else 0
+					opacity: 1 if app.toggleMenu and not app.toggleRowDelete and not app.toggleGroupEdit else 0
+					disabled: False if app.toggleMenu else True
+					on_release: app.toggle_projectSaveAs()
+				Button_ProjectMenu:
+					text: 'Load'
+					size: app.Size3, app.Size5 if app.toggleMenu and not app.toggleRowDelete and not app.toggleGroupEdit else 0
+					opacity: 1 if app.toggleMenu and not app.toggleRowDelete and not app.toggleGroupEdit else 0
+					disabled: False if app.toggleMenu else True
+					on_release: app.toggle_projectLoad()
+				Button_ProjectMenu:
+					id: id_buttonProjectMenuNewProject
+					text: 'New Project'
+					size: app.Size3, app.Size5 if app.toggleMenu and not app.toggleProjectSaves and not app.toggleRowDelete and not app.toggleGroupEdit else 0
+					opacity: 1 if app.toggleMenu and not app.toggleProjectSaves and not app.toggleRowDelete and not app.toggleGroupEdit else 0
+					disabled: False if app.toggleMenu and not app.toggleProjectSaves else True
+					on_release: root.new_project()
+					
+				Button_ProjectMenu:
+					text: 'Delete Saves'
+					size: app.Size3, app.Size5 if app.toggleMenu and app.toggleProjectSaves else 0
+					opacity: 1 if app.toggleMenu and app.toggleProjectSaves else 0
+					disabled: False if app.toggleMenu and app.toggleProjectSaves else True
+					background_color: (1,0,0,1) if app.toggleSaveDelete else app.colorBackground2
+					on_release: app.toggle_saveDelete()
+				Button_ProjectMenu:
+					text: 'Back'
+					size: app.Size3, app.Size5 if app.toggleMenu and app.toggleProjectSaves else 0
+					opacity: 1 if app.toggleMenu and app.toggleProjectSaves else 0
+					disabled: False if app.toggleMenu and app.toggleProjectSaves else True
+					on_release: app.back_toProject()
+					
+			BoxLayout_:
+				size: root.size[0]-root.ids.id_containerMenuButtons.size[0], self.parent.size[1]
+		BoxLayout_H:
+			size: self.parent.size
+			canvas:
+				Color:
+					rgba: app.colorBackground2
+				RoundedRectangle:
+					size: self.size
+					pos: self.pos
+					radius: [0, self.size[1]*((app.phi-1)**3), 0, 0] if app.toggleMenu else [self.size[1]*((app.phi-1)**3), self.size[1]*((app.phi-1)**3),  0, 0]
+			BoxLayout_H:
+				size: self.parent.size[1], self.parent.size[1]
+				BoxLayout_:
+					size: (self.size[1]-root.ids.id_buttonMenuToggle.size[0])*0.5, self.parent.size[1]
+				BoxLayout_V:
+					size: root.ids.id_buttonMenuToggle.size[1], self.parent.size[1]
+					BoxLayout_V:
+						size: app.Size5, app.Size5
+						Button_ProjectMenuToggle:
+							id: id_buttonMenuToggle
+							on_release: app.toggle_menu()
+					BoxLayout_:
+						size: root.ids.id_buttonMenuToggle.size[1], (self.parent.size[1]-root.ids.id_buttonMenuToggle.size[1])*0.5
+				BoxLayout_:
+					size: (self.size[1]-root.ids.id_buttonMenuToggle.size[0])*0.5, self.parent.size[1]
+			BoxLayout_V:
+				size: ((self.parent.size[0])*0.5)-self.size[1], self.parent.size[1]
+				Label_FooterTitles:
+					height: self.parent.size[1]*0.25
+					text: 'Total Cost: '
+				Label_FooterTitles:
+					text: 'Purchased: '
+				Label_FooterTitles:
+					text: 'Not Purchased: '
+				BoxLayout_:
+					size: self.parent.size[0], self.parent.size[1]*0.25
+			BoxLayout_V:
+				size: ((self.parent.size[0])*0.5)-self.size[1], self.parent.size[1]
+				Label_FooterTitles:
+					id: id_totalCost
+					height: self.parent.size[1]*0.25
+					halign: 'left'
+					text: '$0.00'
+				Label_FooterTitles:
+					id: id_totalPurchased
+					halign: 'left'
+					text: '$0.00'
+				Label_FooterTitles:
+					id: id_totalNotPurchased
+					halign: 'left'
+					text: '$0.00'
+				BoxLayout_:
+					size: self.parent.size[0], self.parent.size[1]*0.25
+					
